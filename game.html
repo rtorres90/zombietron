@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>Zombie Tron !!</title>
-        <script src="phaser.js"></script>
+        <script src="./js/libs/phaser.js"></script>
     </head>
     <body style="background-color: #000;">
         <br>    
@@ -58,13 +58,13 @@
             var levelAudio;
 
             function preload() {
-                game.load.image('laser', 'assets/laser.png');
-                game.load.image('trooper', 'assets/trooper.png');
-                game.load.spritesheet('mummy', 'assets/mummy.png', 37, 45, 18);
-                game.load.image('star', 'assets/star.png');
-                game.load.image('bala', 'assets/bala.png');
-                game.load.audio('shooter', 'assets/shooter.mp3');
-                game.load.audio('levelAudio', 'assets/level.mp3');
+                game.load.image('laser', './assets/images/laser.png');
+                game.load.image('trooper', './assets/images/trooper.png');
+                game.load.spritesheet('mummy', './assets/images/mummy.png', 37, 45, 18);
+                game.load.image('star', './assets/images/star.png');
+                game.load.image('bala', './assets/images/bala.png');
+                game.load.audio('shooter', './assets/shooter.mp3');
+                game.load.audio('levelAudio', './assets/level.mp3');
             }
 
             function create() {
