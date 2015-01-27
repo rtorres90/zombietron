@@ -144,6 +144,7 @@
                 trooper = game.add.sprite(game.world.centerX, game.world.centerY + 200, 'trooper');
                 //  trooper.anchor.setTo(0.5, 0.5);
                 game.physics.arcade.enable(trooper);
+                trooper.body.collideWorldBounds = true;
 
 
                 //  Our bullet group
