@@ -19,6 +19,7 @@
         </h3>
     </center>
     <script src="./js/libs/phaser.js"></script>
+    <script src="./js/libs/gamecontroller.min.js"></script>
     <script type="text/javascript">
 
         window.onload = function () {
@@ -60,7 +61,7 @@
             var spz = 1;
             var shooter;
             var text;
-            var live = 3;
+            var live = 3000;
             var level = 1;
             var puntaje = 0;
             var levelAudio;
@@ -76,6 +77,37 @@
             }
 
             function create() {
+                // control touch
+                GameController.init({
+                    left: {
+                        type: 'joystick',
+                        joystick: {
+                            touchStart: function () {
+                                // Don't need this, but the event is here if you want it.
+                            },
+                            touchMove: function (joystick_details) {
+                                game.input.joystickLeft = joystick_details;
+                            },
+                            touchEnd: function () {
+                                game.input.joystickLeft = null;
+                            }
+                        }
+                    },
+                    right: {
+                        type: 'joystick',
+                        joystick: {
+                            touchStart: function () {
+                                // Don't need this, but the event is here if you want it.
+                            },
+                            touchMove: function (joystick_details) {
+                                game.input.joystickRight = joystick_details;
+                            },
+                            touchEnd: function () {
+                                game.input.joystickRight = null;
+                            }
+                        }
+                    }
+                });
 
                 //  Texto del juego
                 stateText = game.add.text(game.world.centerX, game.world.centerY, ' ', {font: '44px Signika', fill: '#fff'});
@@ -362,17 +394,31 @@
 
                 });
 
-                for (var i = 0; i < enemies.length; i++)
-                {
-
-
-                }
 
 
                 //game.physics.arcade.moveToPointer(sprite, 300);
                 //  If the sprite is > 8px away from the pointer then let's move to it
                 // if (game.physics.arcade.distanceToPointer(trooper, game.input.activePointer) > 8)
                 trooper.body.velocity.setTo(0, 0);
+                //movimiento palanca
+                if (game.input.joystickRight) {
+                    // Move the ufo using the joystick's normalizedX and Y values,
+                    // which range from -1 to 1.
+                    trooper.body.velocity.setTo(game.input.joystickRight.normalizedX * 300, game.input.joystickRight.normalizedY * 300 * -1);
+                }
+                else {
+                    trooper.body.velocity.setTo(0, 0);
+                }
+                //disparo palanca
+                if (game.input.joystickLeft) {
+                    // Move the ufo using the joystick's normalizedX and Y values,
+                    // which range from -1 to 1.
+                    fireAngle(game.input.joystickLeft.normalizedX, game.input.joystickLeft.normalizedY);
+                    //console.log(game.input.joystickLeft.normalizedX +" "+game.input.joystickLeft.normalizedY );
+                }
+
+
+
                 if (cursors.left.isDown)
                 {
                     trooper.body.velocity.x = -200;
@@ -389,6 +435,8 @@
                 {
                     trooper.body.velocity.y = 200;
                 }
+
+
 
                 if (fireLeft.isDown && fireUp.isDown)
                 {
@@ -517,7 +565,7 @@
 
                 if (live == 0) {
                     trooper.kill();
-                    
+
                     enemies.removeAll();
                     cantidadEnemigos = 0;
                     stateText.text = " GAME OVER \n Haz click para reiniciar";
@@ -644,6 +692,33 @@
 
 
                         }
+
+                        bulletTime = game.time.now + 200;
+                    }
+                }
+
+            }
+
+            function fireAngle(x, y) {
+                // var shoo = game.add.audio('shooter');
+                shooter.play();
+
+                
+
+                //  To avoid them being allowed to fire too fast we set a time limit
+                if (game.time.now > bulletTime)
+                {
+                    //  Grab the first bullet we can from the pool
+                    bullet = laser.getFirstExists(false);
+
+                    if (bullet)
+                    {
+                        //  And fire it
+
+                        bullet.reset(trooper.x, trooper.y);
+                        bullet.body.velocity.x = x * 600;
+                        bullet.body.velocity.y = (y * -1) * 600;
+
 
                         bulletTime = game.time.now + 200;
                     }
