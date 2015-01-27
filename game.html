@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <title>Zombie Tron !!</title>
         <link rel="stylesheet" href="./css/main.css"/>
+        <link href='http://fonts.googleapis.com/css?family=Signika' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <br>    
@@ -77,12 +78,12 @@
             function create() {
 
                 //  Texto del juego
-                stateText = game.add.text(game.world.centerX, game.world.centerY, ' ', {font: '44px Arial', fill: '#fff'});
+                stateText = game.add.text(game.world.centerX, game.world.centerY, ' ', {font: '44px Signika', fill: '#fff'});
                 stateText.anchor.setTo(0.5, 0.5);
                 stateText.visible = false;
                 //Texto actualizable
                 text = "LIVES: " + live;
-                var style = {font: "25px Arial", fill: "#ff0044", align: "center"};
+                var style = {font: "25px Signika", fill: "#ff0044", align: "center"};
 
                 t = game.add.text(50, 20, text, style);
                 /*
@@ -327,7 +328,7 @@
                 game.world.remove(t);
                 text = "LEVEL " + level + "\n\LIVES  " + live + "\n\SCORE " + puntaje;
 
-                var style = {font: "25px Arial", fill: "#ff0044", fontStyle: "italic"};
+                var style = {font: "25px Signika", fill: "#ff0044", fontStyle: "oblique"};
 
                 t = game.add.text(50, 20, text, style);
 
