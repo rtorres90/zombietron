@@ -464,7 +464,7 @@
                 enemies.lives = enemies.lives - 1;
                 if (enemies.lives == 0) {
                     enemies.kill();
-                    puntaje += 10;
+                    puntaje += 10 * level;
                     cantidadEnemigos = cantidadEnemigos - 1;
                     if (cantidadEnemigos == 0) {
                         trooper.kill();
@@ -511,7 +511,7 @@
 
                 enemie.kill();
                 cantidadEnemigos = cantidadEnemigos - 1;
-                puntaje += 10;
+                puntaje += 10 * level;
                 live = live - 1;
 
                 if (live == 0) {
