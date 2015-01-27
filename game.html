@@ -184,6 +184,7 @@
                     enemigo.animations.add('fly', [0, 1, 2, 3], 20, true);
                     enemigo.play('fly');
                     enemigo.lives = 3;
+                    enemigo.body.collideWorldBounds = true;
                     cantidadEnemigos++;
                     // enemigo.body.moves = false;
                 }
