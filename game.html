@@ -61,6 +61,7 @@
             var text;
             var live = 3;
             var level = 1;
+            var puntaje = 0;
             var levelAudio;
 
             function preload() {
@@ -322,7 +323,7 @@
             function update() {
                 //
                 game.world.remove(t);
-                text = "LEVEL " + level + "\n\LIVES  " + live;
+                text = "LEVEL " + level + "\n\LIVES  " + live + "\n\SCORE " + puntaje;
 
                 var style = {font: "25px Arial", fill: "#ff0044", fontStyle: "italic"};
 
@@ -461,6 +462,7 @@
                 enemies.lives = enemies.lives - 1;
                 if (enemies.lives == 0) {
                     enemies.kill();
+                    puntaje += 10;
                     cantidadEnemigos = cantidadEnemigos - 1;
                     if (cantidadEnemigos == 0) {
                         trooper.kill();
@@ -507,11 +509,12 @@
 
                 enemie.kill();
                 cantidadEnemigos = cantidadEnemigos - 1;
+                puntaje += 10;
                 live = live - 1;
 
                 if (live == 0) {
                     trooper.kill();
-
+                    
                     enemies.removeAll();
                     cantidadEnemigos = 0;
                     stateText.text = " GAME OVER \n Haz click para reiniciar";
@@ -552,6 +555,7 @@
                 //resets the life count
                 live = 3;
                 level = 1;
+                puntaje = 0;
                 //  And brings the aliens back from the dead :)
                 //en.removeAll();
                 createEnemies();
