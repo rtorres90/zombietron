@@ -69,7 +69,7 @@
             function preload() {
                 game.load.image('laser', './assets/images/laser.png');
                 game.load.image('trooper', './assets/images/trooper.png');
-                game.load.spritesheet('mummy', './assets/images/mummy.png', 37, 45, 18);
+                game.load.image('zombie1', './assets/images/zombie1.gif');
                 game.load.image('star', './assets/images/star.png');
                 game.load.image('bala', './assets/images/bala.png');
                 game.load.audio('shooter', './assets/shooter.mp3');
@@ -211,10 +211,10 @@
                     ;
                     var y = Math.floor((Math.random() * 600) + 1);
                     ;
-                    var enemigo = enemies.create(x + i, y + i, 'mummy');
+                    var enemigo = enemies.create(x + i, y + i, 'zombie1');
                     enemigo.anchor.setTo(0.5, 0.5);
-                    enemigo.animations.add('fly', [0, 1, 2, 3], 20, true);
-                    enemigo.play('fly');
+                    //enemigo.animations.add('fly', [0, 1, 2, 3], 20, true);
+                    //enemigo.play('fly');
                     enemigo.lives = 3;
                     enemigo.body.collideWorldBounds = true;
                     cantidadEnemigos++;
