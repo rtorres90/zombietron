@@ -61,7 +61,7 @@
             var spz = 1;
             var shooter;
             var text;
-            var live = 3000;
+            var live = 7;
             var level = 1;
             var puntaje = 0;
             var levelAudio;
@@ -205,8 +205,7 @@
             }
 
             function createEnemies() {
-                // var x = game.world.randomX;
-                //var y = game.world.randomY;
+               
                 for (var i = 0; i <= (level * 2); i++) {
                     var x = Math.floor((Math.random() * 800) + 1);
                     ;
@@ -219,16 +218,9 @@
                     enemigo.lives = 3;
                     enemigo.body.collideWorldBounds = true;
                     cantidadEnemigos++;
-                    // enemigo.body.moves = false;
+                    
                 }
-                // enemigo.x = 100;
-                //enemigo.y = 50;
-
-                //  All this does is basically start the invaders moving. Notice we're moving the Group they belong to, rather than the invaders directly.
-                //var tween = game.add.tween(aliens).to({x: 200}, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
-
-                //  When the tween loops it calls descend
-                // tween.onLoop.add(descend, this);
+                
             }
 
             function moverEstrellas() {
@@ -401,7 +393,7 @@
                 // if (game.physics.arcade.distanceToPointer(trooper, game.input.activePointer) > 8)
                 trooper.body.velocity.setTo(0, 0);
                 //movimiento palanca
-                if (game.input.joystickRight) {
+                  if (game.input.joystickRight) {
                     // Move the ufo using the joystick's normalizedX and Y values,
                     // which range from -1 to 1.
                     trooper.body.velocity.setTo(game.input.joystickRight.normalizedX * 300, game.input.joystickRight.normalizedY * 300 * -1);
@@ -416,6 +408,7 @@
                     fireAngle(game.input.joystickLeft.normalizedX, game.input.joystickLeft.normalizedY);
                     //console.log(game.input.joystickLeft.normalizedX +" "+game.input.joystickLeft.normalizedY );
                 }
+              
 
 
 
@@ -485,6 +478,8 @@
                     fire("right");
                 }
 
+              
+
                 //  Run collision
                 game.physics.arcade.overlap(laser, enemies, collisionHandler, null, this);
                 game.physics.arcade.overlap(trooper, enemyBullets, collisionTrooper, null, this);
@@ -497,6 +492,7 @@
                     enemies.removeAll();
                     cantidadEnemigos = 0;
                     stateText.text = " GAME OVER \n Haz click para reiniciar";
+                    stateText.events.onInputDown.add(restart, this);
                     levelAudio.pause();
                     stateText.visible = true;
                     //the "click to restart" handler
@@ -520,6 +516,7 @@
 
                         //enemies.removeAll();
                         stateText.text = " WIN ! \n Haz click para el \n siguiente nivel";
+                        stateText.events.onInputDown.add(nextLevel, this);
                         stateText.visible = true;
                         //the "click to restart" handler
                         game.input.onTap.addOnce(nextLevel, this);
@@ -582,7 +579,7 @@
                     //enemies.removeAll();
                     stateText.text = " WIN ! \n Haz click para el \n siguiente nivel";
                     stateText.visible = true;
-                    //the "click to restart" handler
+                    stateText.events.onInputDown.add(nextLevel, this);
                     game.input.onTap.addOnce(nextLevel, this);
 
                 }
